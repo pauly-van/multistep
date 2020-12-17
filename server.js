@@ -8,7 +8,7 @@ const port = 3000;
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use(path(__dirname, './client'));
+app.use(express.static(path.join(__dirname, './client')));
 
 
 app.get('/', (req, res)=>{
@@ -20,4 +20,4 @@ app.post('/', (req, res)=>{
 })
 
 
-app.listen(port, ()=>'Server listening on port '+port);
+app.listen(port, ()=>console.log('Server listening on port '+port));

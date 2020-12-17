@@ -4,14 +4,16 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "build": "babel client/component/app.jsx -o client/app.js",
+    "start": "nodemon ./server.js",
+    "require": "browserify client/app.js -o bundle.js -t [ babelify --presets [ @babel/preset-env @babel/preset-react]"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "mongoose": "^5.11.8",
+    "path": "^0.12.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
@@ -19,7 +21,9 @@
     "@babel/cli": "^7.12.10",
     "@babel/core": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
+    "@babel/preset-es2015": "^7.0.0-beta.53",
     "@babel/preset-react": "^7.12.10",
+    "babelify": "^10.0.0",
     "express": "^4.17.1",
     "nodemon": "^2.0.6"
   }
