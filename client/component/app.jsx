@@ -5,13 +5,13 @@ const AcctCreate = (props) =>(
         <fieldset>
           <legend>Create Account</legend>
           <label>Name:</label><br/>
-          <input type='text'/>
+          <input name='name' onChange={props.getData} type='text'/>
           <br/>
           <label>Email:</label><br/>
-          <input type='text'/>
+          <input name='email' onChange={props.getData} type='text'/>
           <br/>
           <label>Password:</label><br/>
-          <input type='password'/>
+          <input name='password' onChange={props.getData} type='password'/>
           <br/>
         </fieldset>
      </form>
@@ -25,13 +25,13 @@ const Address = (props) => (
         <fieldset>
           <legend>Address Information</legend>
           <label>Address</label><br/>
-          <input type='text'/>
+          <input name='address' onChange={props.getData} type='text'/>
           <br/>
           <label>City, State, Zip Code</label><br/>
-          <input type='text'/>
+          <input name='city' onChange={props.getData} type='text'/>
           <br/>
           <label>Phone Number</label><br/>
-          <input type='number'/>
+          <input name='phone' onChange={props.getData} type='number'/>
           <br/>
         </fieldset>
      </form>
@@ -45,23 +45,45 @@ const Billing = (props) => (
         <fieldset>
           <legend>Billing Information</legend>
           <label>Credit Card Number</label><br/>
-          <input type='number'/>
+          <input name='credit' onChange={props.getData} type='number'/>
           <br/>
           <label>Expiry Date</label><br/>
-          <input type='number'/>
+          <input name='expiry' onChange={props.getData} type='number'/>
+          <br/>
+          <label>CCV</label><br/>
+          <input name='ccv' onChange={props.getData} type='number'/>
           <br/>
           <label>Billing Zip Code</label><br/>
-          <input type='number'/>
+          <input name='billingZip' onChange={props.getData} type='number'/>
           <br/>
         </fieldset>
      </form>
   </div>
 )
 
-const Complete = () =>(
+const Complete = (props) =>(
   <div>
     <h1>Multi-Step Checkout</h1>
     <h3>Transaction Complete!</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>City, State, Zip</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+            <td>{props.data.name}</td>
+            <td>{props.data.email}</td>
+            <td>{props.data.number}</td>
+            <td>{props.data.address}</td> 
+            <td>{props.data.city_state_zipcode}</td>
+            </tr>
+        </tbody>
+    </table>
   </div>
 )
 
@@ -69,24 +91,50 @@ class App extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      currentPg: 'F1'
+      currentPg: 'F1',
+      name: '',
+      password: '',
+      email: '',
+      address: '',
+      city_state_zipcode: '',
+      credit: '',
+      expiry: '',
+      CVV: '',
+      billingZip: ''
     }
+    this.getData = this.getData.bind(this);
+
+  }
+
+  getData({target}){
+    this.setState({
+      [target.name]: target.value
+    })
   }
   
   changePage(){
-    if(this.state.currentPg==='F1'){
-      this.setState({
-        currentPg: 'F2'
-      })
-    }else if(this.state.currentPg==='F2'){
-      this.setState({
-        currentPg: 'F3'
-      })
-    }else{
-      this.setState({
-        currentPg: 'F4'
-      })
-    }
+    switch(this.state.currentPg){
+        case 'F1':
+          this.setState({
+          currentPg: 'F2'
+          });
+          break;
+        case 'F2':
+          this.setState({
+            currentPg: 'F3'
+          });
+          break;
+        case 'F3':
+          this.setState({
+          currentPg: 'F4'
+        })
+         axios({
+           url: 'http://localhost:3000',
+           method: 'POST',
+           data: this.state
+         })
+        break;
+     }
   }
 
   render(){
@@ -94,37 +142,32 @@ class App extends React.Component{
       case 'F1':
         return(
           <div>
-            <AcctCreate></AcctCreate>
+            <AcctCreate getData={this.getData}></AcctCreate>
             <button onClick={this.changePage.bind(this)}>Submit</button>
           </div>
         )
       case 'F2':
         return(
           <div>
-            <Address></Address>
+            <Address getData={this.getData}></Address>
             <button onClick={this.changePage.bind(this)}>Submit</button>
           </div>
         )
       case 'F3':
         return(
           <div>
-            <Billing></Billing>
+            <Billing getData={this.getData}></Billing>
             <button onClick={this.changePage.bind(this)}>Submit</button>
           </div>
         )
       case 'F4':
         return(
           <div>
-            <Complete></Complete>
+            <Complete data={this.state}></Complete>
           </div>
         )
     }
-      // if(this.state.currentPg==='F1'){
-      // }else if(this.state.currentPg==='F2'){
-      // }else if(this.state.currentPg==='F3'){
-      // }else
   }
 };
-
 
 ReactDOM.render(<App/>, document.getElementById('app'));

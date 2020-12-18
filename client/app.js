@@ -2,6 +2,8 @@
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -24,36 +26,58 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 var AcctCreate = function AcctCreate(props) {
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, "Multi-Step Checkout"), /*#__PURE__*/React.createElement("form", null, /*#__PURE__*/React.createElement("fieldset", null, /*#__PURE__*/React.createElement("legend", null, "Create Account"), /*#__PURE__*/React.createElement("label", null, "Name:"), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("input", {
+    name: "name",
+    onChange: props.getData,
     type: "text"
   }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("label", null, "Email:"), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("input", {
+    name: "email",
+    onChange: props.getData,
     type: "text"
   }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("label", null, "Password:"), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("input", {
+    name: "password",
+    onChange: props.getData,
     type: "password"
   }), /*#__PURE__*/React.createElement("br", null))));
 };
 
 var Address = function Address(props) {
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, "Multi-Step Checkout"), /*#__PURE__*/React.createElement("form", null, /*#__PURE__*/React.createElement("fieldset", null, /*#__PURE__*/React.createElement("legend", null, "Address Information"), /*#__PURE__*/React.createElement("label", null, "Address"), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("input", {
+    name: "address",
+    onChange: props.getData,
     type: "text"
   }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("label", null, "City, State, Zip Code"), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("input", {
+    name: "city",
+    onChange: props.getData,
     type: "text"
   }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("label", null, "Phone Number"), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("input", {
+    name: "phone",
+    onChange: props.getData,
     type: "number"
   }), /*#__PURE__*/React.createElement("br", null))));
 };
 
 var Billing = function Billing(props) {
   return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, "Multi-Step Checkout"), /*#__PURE__*/React.createElement("form", null, /*#__PURE__*/React.createElement("fieldset", null, /*#__PURE__*/React.createElement("legend", null, "Billing Information"), /*#__PURE__*/React.createElement("label", null, "Credit Card Number"), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("input", {
+    name: "credit",
+    onChange: props.getData,
     type: "number"
   }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("label", null, "Expiry Date"), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("input", {
+    name: "expiry",
+    onChange: props.getData,
+    type: "number"
+  }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("label", null, "CCV"), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("input", {
+    name: "ccv",
+    onChange: props.getData,
     type: "number"
   }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("label", null, "Billing Zip Code"), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("input", {
+    name: "billingZip",
+    onChange: props.getData,
     type: "number"
   }), /*#__PURE__*/React.createElement("br", null))));
 };
 
-var Complete = function Complete() {
-  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, "Multi-Step Checkout"), /*#__PURE__*/React.createElement("h3", null, "Transaction Complete!"));
+var Complete = function Complete(props) {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, "Multi-Step Checkout"), /*#__PURE__*/React.createElement("h3", null, "Transaction Complete!"), /*#__PURE__*/React.createElement("table", null, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "Name"), /*#__PURE__*/React.createElement("th", null, "Email"), /*#__PURE__*/React.createElement("th", null, "Address"), /*#__PURE__*/React.createElement("th", null, "City, State, Zip"))), /*#__PURE__*/React.createElement("tbody", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("td", null, props.data.name), /*#__PURE__*/React.createElement("td", null, props.data.email), /*#__PURE__*/React.createElement("td", null, props.data.number), /*#__PURE__*/React.createElement("td", null, props.data.address), /*#__PURE__*/React.createElement("td", null, props.data.city_state_zipcode)))));
 };
 
 var App = /*#__PURE__*/function (_React$Component) {
@@ -68,26 +92,53 @@ var App = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      currentPg: 'F1'
+      currentPg: 'F1',
+      name: '',
+      password: '',
+      email: '',
+      address: '',
+      city_state_zipcode: '',
+      credit: '',
+      expiry: '',
+      CVV: '',
+      billingZip: ''
     };
+    _this.getData = _this.getData.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(App, [{
+    key: "getData",
+    value: function getData(_ref) {
+      var target = _ref.target;
+      this.setState(_defineProperty({}, target.name, target.value));
+    }
+  }, {
     key: "changePage",
     value: function changePage() {
-      if (this.state.currentPg === 'F1') {
-        this.setState({
-          currentPg: 'F2'
-        });
-      } else if (this.state.currentPg === 'F2') {
-        this.setState({
-          currentPg: 'F3'
-        });
-      } else {
-        this.setState({
-          currentPg: 'F4'
-        });
+      switch (this.state.currentPg) {
+        case 'F1':
+          this.setState({
+            currentPg: 'F2'
+          });
+          break;
+
+        case 'F2':
+          this.setState({
+            currentPg: 'F3'
+          });
+          break;
+
+        case 'F3':
+          this.setState({
+            currentPg: 'F4'
+          });
+          axios({
+            url: 'http://localhost:3000',
+            method: 'POST',
+            data: this.state
+          });
+          break;
       }
     }
   }, {
@@ -95,27 +146,31 @@ var App = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       switch (this.state.currentPg) {
         case 'F1':
-          return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(AcctCreate, null), /*#__PURE__*/React.createElement("button", {
+          return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(AcctCreate, {
+            getData: this.getData
+          }), /*#__PURE__*/React.createElement("button", {
             onClick: this.changePage.bind(this)
           }, "Submit"));
 
         case 'F2':
-          return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Address, null), /*#__PURE__*/React.createElement("button", {
+          return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Address, {
+            getData: this.getData
+          }), /*#__PURE__*/React.createElement("button", {
             onClick: this.changePage.bind(this)
           }, "Submit"));
 
         case 'F3':
-          return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Billing, null), /*#__PURE__*/React.createElement("button", {
+          return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Billing, {
+            getData: this.getData
+          }), /*#__PURE__*/React.createElement("button", {
             onClick: this.changePage.bind(this)
           }, "Submit"));
 
         case 'F4':
-          return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Complete, null));
-      } // if(this.state.currentPg==='F1'){
-      // }else if(this.state.currentPg==='F2'){
-      // }else if(this.state.currentPg==='F3'){
-      // }else
-
+          return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Complete, {
+            data: this.state
+          }));
+      }
     }
   }]);
 

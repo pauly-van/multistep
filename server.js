@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-
+const db = require('./database');
 
 const app = express();
 const port = 3000;
@@ -16,7 +16,7 @@ app.get('/', (req, res)=>{
 })
 
 app.post('/', (req, res)=>{
-  // do something on post
+  db.saveEntry(req.body);
 })
 
 
